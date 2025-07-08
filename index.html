@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .calculator {
+            font-family: Arial, sans-serif;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 100%;
+            margin: 20px auto;
+            box-sizing: border-box;
+            width: 90%;
+        }
+
+        h3 {
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        label {
+            min-width: 120px;
+            font-size: 14px;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 80px;
+            box-sizing: border-box;
+        }
+
+        .cost-result {
+            margin-left: 10px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .total {
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        @media (min-width: 600px) {
+            .calculator {
+                width: 500px;
+            }
+            
+            .input-group {
+                flex-wrap: nowrap;
+            }
+            
+            button {
+                width: auto;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h3>Calculateur de Coût de Production</h3>
+        
+        <div class="input-group">
+            <label for="texapon-qty">Quantité de Texapon (ml):</label>
+            <input type="number" id="texapon-qty" value="100">
+            <label for="texapon-price">Prix (FCFA/L):</label>
+            <input type="number" id="texapon-price" value="2500">
+            <span id="texapon-cost" class="cost-result">Coût : 250 FCFA</span>
+        </div>
+
+        <div class="input-group">
+            <label for="soude-qty">Quantité de Soude (g):</label>
+            <input type="number" id="soude-qty" value="30">
+            <label for="soude-price">Prix (FCFA/kg):</label>
+            <input type="number" id="soude-price" value="1000">
+            <span id="soude-cost" class="cost-result">Coût : 30 FCFA</span>
+        </div>
+
+        <div class="total">
+            Total : <span id="total-cost">280</span> FCFA/L
+        </div>
+
+        <button onclick="calculateCost()">Recalculer</button>
+    </div>
+
+    <script>
+        function calculateCost() {
+            // Texapon
+            const texaponQty = document.getElementById("texapon-qty").value;
+            const texaponPrice = document.getElementById("texapon-price").value;
+            const texaponCost = (texaponQty * texaponPrice) / 1000;
+            document.getElementById("texapon-cost").innerHTML = `Coût : ${texaponCost.toFixed(0)} FCFA`;
+
+            // Soude
+            const soudeQty = document.getElementById("soude-qty").value;
+            const soudePrice = document.getElementById("soude-price").value;
+            const soudeCost = (soudeQty * soudePrice) / 1000;
+            document.getElementById("soude-cost").innerHTML = `Coût : ${soudeCost.toFixed(0)} FCFA`;
+
+            // Total
+            document.getElementById("total-cost").innerText = (texaponCost + soudeCost).toFixed(0);
+        }
+        // Calcul initial
+        calculateCost();
+    </script>
+</body>
+</html>
